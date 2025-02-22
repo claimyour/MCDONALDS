@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your McDonald's Gift Card</title>
+    <meta name="description" content="Claim your exclusive $150 McDonald's gift card by participating in our quick survey. Limited time offer!">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A3556;
+            --secondary: #D4A017;
+            --accent: #FFFFFF;
+            --dark: #2D2D2D;
+            --light-gray: #F5F6F5;
+            --transition: all 0.3s ease-in-out;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: var(--light-gray);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            background: var(--primary);
+            padding: 1rem 0;
+            z-index: 10;
+            box-shadow: var(--shadow);
+        }
+
+        .nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: var(--secondary);
+        }
+
+        .header {
+            background: var(--primary);
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--accent);
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            width: 60px;
+            margin-bottom: 1rem;
+            filter: brightness(1.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--accent);
+            border-radius: 10px;
+            margin: 2rem auto;
+            max-width: 800px;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 0 auto 2rem;
+            max-width: 600px;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100px;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-item p {
+            font-size: 0.9rem;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            margin: 1rem auto;
+            overflow: hidden;
+        }
+
+        .progress {
+            width: 0;
+            height: 100%;
+            background: var(--secondary);
+            animation: load 2s ease-in-out infinite;
+        }
+
+        @keyframes load {
+            0% { width: 0; }
+            50% { width: 70%; }
+            100% { width: 0; }
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #FFD700, #FF8C00); /* Soft gold to warm orange */
+            color: var(--primary);
+            padding: 1.5rem 3.5rem; /* Slightly larger padding */
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: 1px; /* Adds elegance */
+            border: 3px solid var(--primary);
+            border-radius: 15px; /* Softer, rounded edges */
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 8px 20px rgba(212, 160, 23, 0.4); /* Golden shadow */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%; /* Shine effect on hover */
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, #FF8C00, #FFD700); /* Reverse gradient */
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(212, 160, 23, 0.6);
+        }
+
+        .cta-button i {
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover i {
+            transform: translateY(-2px); /* Subtle bounce for the gift icon */
+        }
+
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .trust-badge i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .share-button {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .share-button:hover {
+            background: var(--secondary);
+        }
+
+        .benefits-section {
+            padding: 4rem 0;
+            background: var(--light-gray);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-item {
+            padding: 2rem;
+            background: var(--accent);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-item i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-item h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-item p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .stats-section {
+            padding: 4rem 0;
+            text-align: center;
+            background: var(--primary);
+            color: var(--accent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--accent);
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-grid {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--light-gray);
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item.active {
+            border-color: var(--primary);
+        }
+
+        .faq-question {
+            padding: 1rem;
+            background: none;
+            border: none;
+            text-align: left;
+            color: var(--dark);
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .faq-icon:before,
+        .faq-icon:after {
+            content: '';
+            position: absolute;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .faq-icon:before {
+            width: 10px;
+            height: 2px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .faq-icon:after {
+            width: 2px;
+            height: 10px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .faq-item.active .faq-icon:after {
+            height: 0;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 1rem;
+        }
+
+        .faq-answer p {
+            color: #555;
+        }
+
+        .reviews-section {
+            padding: 4rem 0;
+            text-align: center;
+            background: var(--light-gray);
+        }
+
+        .review-counter {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .review-slider-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .review-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .review-card {
+            background: var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            flex: 0 0 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .review-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+        }
+
+        .review-header h4 {
+            color: var(--dark);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .review-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .rating-stars i {
+            color: var(--secondary);
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+
+        .slider-dot.active {
+            opacity: 1;
+            background: var(--secondary);
+        }
+
+        .social-proof {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .contact-section {
+            padding: 4rem 0;
+            background: var(--accent);
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: var(--accent);
+            padding: 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .contact-form button:hover {
+            background: var(--secondary);
+        }
+
+        footer {
+            background: var(--primary);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--accent);
+            border-top: 4px solid var(--secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .timer-container {
+            margin-bottom: 2rem;
+        }
+
+        .timer-text {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .time-segment {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .time-segment span:first-child {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .time-segment .time-label {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 20;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--accent);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-content h3 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content .cta-button {
+            display: inline-flex;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 15;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            background: var(--secondary);
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary);
+            color: var(--accent);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            z-index: 15;
+            transition: var(--transition);
+        }
+
+        .chat-widget:hover {
+            background: var(--secondary);
+        }
+
+        .chat-widget i {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 1.2rem 2.5rem; /* Adjusted for mobile */
+                font-size: 1.4rem;
+            }
+            .nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                padding: 0 1rem;
+            }
+            .benefits-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .review-slider-container {
+                max-width: 100%;
+            }
+            .trust-badges,
+            .progress-steps,
+            .share-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .step-item {
+                width: 80px;
+            }
+            .chat-widget {
+                bottom: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="header" id="home">
+        <div class="container">
+            <img src="https://www.mcdonalds.ma/mcdelivery/images/logo.png" alt="McDonald's" class="logo">
+            <h1>Claim Your McDonald's Gift Card</h1>
+            <p>Exclusive Offer - $150 Value</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="cta-section">
+            <div class="progress-steps">
+                <div class="step-item">
+                    <div class="step-circle">1</div>
+                    <p>Take Survey</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">2</div>
+                    <p>Verify Details</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-circle">3</div>
+                    <p>Claim Reward</p>
+                </div>
+            </div>
+            <div class="timer-container">
+                <p class="timer-text">Offer Expires In:</p>
+                <div class="timer">
+                    <div class="time-segment">
+                        <span id="days">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-segment">
+                        <span id="hours">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-segment">
+                        <span id="minutes">00</span>
+                        <span class="time-label">Minutes</span>
+                    </div>
+                    <div class="time-segment">
+                        <span id="seconds">00</span>
+                        <span class="time-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+            <a href="https://smrturl.co/a/s94fe5e08ab/849?s1=" class="cta-button" target="_blank">
+                <i class="fas fa-gift"></i>
+                Claim Your Gift Card
+            </a>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="trust-badges">
+                <div class="trust-badge"><i class="fas fa-lock"></i> Secure Process</div>
+                <div class="trust-badge"><i class="fas fa-check-circle"></i> Verified Offer</div>
+            </div>
+            <div class="share-buttons">
+                <a href="https://facebook.com/sharer/sharer.php?u=https://example.com" class="share-button" target="_blank"><i class="fab fa-facebook-f"></i> Share</a>
+                <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Claim%20your%20$150%20McDonald%27s%20gift%20card!" class="share-button" target="_blank"><i class="fab fa-twitter"></i> Tweet</a>
+            </div>
+        </section>
+
+        <section class="benefits-section">
+            <div class="container">
+                <h2 class="section-title">Why Claim Your Gift Card?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <h3>Free $150 Value</h3>
+                        <p>Enjoy a $150 McDonald's gift card at no cost to you.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Quick Process</h3>
+                        <p>Takes just 2 minutes to complete the survey.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Fast Delivery</h3>
+                        <p>Digital card in 10-30 minutes, physical in 3-5 days.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <div class="container">
+                <h2 class="section-title">Our Impact</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>10,000+</h3>
+                        <p>Satisfied Users</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1,234</h3>
+                        <p>Gift Cards Claimed</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2 Min</h3>
+                        <p>Survey Time</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="social-proof">
+            <p><span id="claim-count">1,234</span> Customers Have Claimed Their Gift Card!</p>
+        </div>
+
+        <div class="container">
+            <section class="faq-section" id="faq">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <h3>How do I qualify?</h3>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Complete our quick 2-minute survey to qualify for your $150 McDonald's gift card.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <h3>Is there a cost?</h3>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No cost involved! Simply complete the survey to claim your reward.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <h3>How do I receive it?</h3>
+                            <div class="faq-icon"></div>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Digital gift cards are emailed within 10-30 minutes. Physical cards ship in 3-5 business days.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="reviews-section" id="reviews">
+                <h2 class="section-title">Customer Testimonials</h2>
+                <div class="review-slider-container">
+                    <div class="review-slider">
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="https://cdn1.booknode.com/author_picture/5048/full/sarah-rivens-5047808.jpg" alt="Sarah J.">
+                                <h4>Sarah J. <i class="fab fa-instagram"></i></h4>
+                            </div>
+                            <p>"The process was seamless and professional. Received my gift card quickly—highly recommend!"</p>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="https://www.nairaland.com/attachments/11187037_ef80d8b9f443869818b4a7d1f630a979_webp5b33600d99bf43a457aa1427c9143ee7" alt="Michael R.">
+                                <h4>Michael R. <i class="fab fa-twitter"></i></h4>
+                            </div>
+                            <p>"Efficient and straightforward. Used my gift card the same day—great experience!"</p>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <img src="https://photoshulk.com/wp-content/uploads/Cute-College-Girl-DP.jpg" alt="Emily C.">
+                                <h4>Emily C. <i class="fab fa-facebook-f"></i></h4>
+                            </div>
+                            <p>"Top-notch promotion! Received both digital and physical cards promptly."</p>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+                <p class="review-counter"><span id="review-count">3</span> Happy Customers</p>
+            </section>
+
+            <section class="contact-section" id="contact">
+                <h2 class="section-title">Contact Us</h2>
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>This promotion is not affiliated with McDonald's. Gift cards subject to terms.</p>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="cta-modal">
+        <div class="modal-content">
+            <span class="close-modal">×</span>
+            <h3>Don’t Miss Out!</h3>
+            <p>Claim your $150 McDonald's gift card before the offer expires.</p>
+            <a href="https://smrturl.co/a/s94fe5e08ab/849?s1=" class="cta-button" target="_blank">
+                <i class="fas fa-gift"></i>
+                Claim Now
+            </a>
+        </div>
+    </div>
+
+    <div class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="chat-widget" id="chat-widget">
+        <i class="fas fa-comment"></i>
+        <span>Chat with Us</span>
+    </div>
+
+    <script>
+        // Timer
+        const targetDate = new Date('March 1, 2025 23:59:59').getTime();
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            daysElement.textContent = String(days).padStart(2, '0');
+            hoursElement.textContent = String(hours).padStart(2, '0');
+            minutesElement.textContent = String(minutes).padStart(2, '0');
+            secondsElement.textContent = String(seconds).padStart(2, '0');
+
+            if (diff <= 0) {
+                clearInterval(timerInterval);
+                daysElement.textContent = '00';
+                hoursElement.textContent = '00';
+                minutesElement.textContent = '00';
+                secondsElement.textContent = '00';
+            }
+        }
+
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.closest('.faq-item');
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth Scroll for Navigation
+        document.querySelectorAll('.nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Social Proof Counter
+        let claimCount = 1234;
+        const claimCountElement = document.getElementById('claim-count');
+        setInterval(() => {
+            claimCount += Math.floor(Math.random() * 5);
+            claimCountElement.textContent = claimCount.toLocaleString();
+        }, 5000);
+
+        // Review Slider and Counter
+        const slider = document.querySelector('.review-slider');
+        const sliderContainer = document.querySelector('.review-slider-container');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        const slideCount = 3;
+
+        function updateSlider() {
+            const slideWidth = sliderContainer.offsetWidth;
+            slider.style.transform = translateX(-${currentSlide * slideWidth}px);
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }, 5000);
+
+        window.addEventListener('resize', updateSlider);
+        updateSlider();
+
+        // Modal Popup
+        const modal = document.getElementById('cta-modal');
+        const closeModal = document.querySelector('.close-modal');
+
+        setTimeout(() => {
+            modal.style.display = 'flex';
+        }, 5000);
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Contact Form Submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! Our team will respond soon.');
+        });
+
+        // Back-to-Top Button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Chat Widget (Placeholder)
+        const chatWidget = document.getElementById('chat-widget');
+        chatWidget.addEventListener('click', () => {
+            alert('Live chat coming soon! For now, please use the contact form.');
+        });
+    </script>
+</body>
+</html>
