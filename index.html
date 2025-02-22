@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Claim Your McDonald's Gift Card</title>
     <meta name="description" content="Claim your exclusive $150 McDonald's gift card by participating in our quick survey. Limited time offer!">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,13 +30,14 @@
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            font-size: 16px;
         }
 
         .nav {
             position: sticky;
             top: 0;
             background: var(--primary);
-            padding: 1rem 0;
+            padding: 1rem;
             z-index: 10;
             box-shadow: var(--shadow);
         }
@@ -46,6 +47,7 @@
             justify-content: center;
             gap: 2rem;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         .nav a {
@@ -62,7 +64,7 @@
 
         .header {
             background: var(--primary);
-            padding: 4rem 0;
+            padding: 4rem 1rem;
             text-align: center;
             color: var(--accent);
             border-bottom: 4px solid var(--secondary);
@@ -81,20 +83,19 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 700;
             margin-bottom: 0.5rem;
         }
 
         .header p {
-            font-size: 1.2rem;
-            font-weight: 400;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             opacity: 0.9;
         }
 
         .cta-section {
             text-align: center;
-            padding: 3rem 2rem;
+            padding: 3rem 1rem;
             background: var(--accent);
             border-radius: 10px;
             margin: 2rem auto;
@@ -105,17 +106,16 @@
         .progress-steps {
             display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin: 0 auto 2rem;
-            max-width: 600px;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .step-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100px;
+            min-width: 80px;
         }
 
         .step-circle {
@@ -134,7 +134,6 @@
         .step-item p {
             font-size: 0.9rem;
             color: var(--dark);
-            text-align: center;
         }
 
         .progress-bar {
@@ -160,53 +159,32 @@
         }
 
         .cta-button {
-            background: linear-gradient(135deg, #FFD700, #FF8C00); /* Soft gold to warm orange */
+            background: linear-gradient(135deg, #FFD700, #FF8C00);
             color: var(--primary);
-            padding: 1.5rem 3.5rem; /* Slightly larger padding */
-            font-size: 1.6rem;
+            padding: 1.5rem 3rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            letter-spacing: 1px; /* Adds elegance */
             border: 3px solid var(--primary);
-            border-radius: 15px; /* Softer, rounded edges */
+            border-radius: 15px;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            box-shadow: 0 8px 20px rgba(212, 160, 23, 0.4); /* Golden shadow */
+            box-shadow: 0 8px 20px rgba(212, 160, 23, 0.4);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%; /* Shine effect on hover */
-        }
-
         .cta-button:hover {
-            background: linear-gradient(135deg, #FF8C00, #FFD700); /* Reverse gradient */
+            background: linear-gradient(135deg, #FF8C00, #FFD700);
             transform: scale(1.05);
             box-shadow: 0 12px 25px rgba(212, 160, 23, 0.6);
         }
 
         .cta-button i {
-            font-size: 1.8rem;
-            transition: var(--transition);
-        }
-
-        .cta-button:hover i {
-            transform: translateY(-2px); /* Subtle bounce for the gift icon */
+            font-size: 1.6rem;
         }
 
         .trust-badges {
@@ -223,7 +201,6 @@
             gap: 0.5rem;
             color: var(--primary);
             font-weight: 600;
-            font-size: 0.9rem;
         }
 
         .trust-badge i {
@@ -236,6 +213,7 @@
             justify-content: center;
             gap: 1rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .share-button {
@@ -253,13 +231,13 @@
         }
 
         .benefits-section {
-            padding: 4rem 0;
+            padding: 4rem 1rem;
             background: var(--light-gray);
             text-align: center;
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: clamp(1.8rem, 4vw, 2rem);
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 2rem;
@@ -306,16 +284,10 @@
             font-size: 1.3rem;
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .benefit-item p {
-            color: #666;
-            font-size: 0.95rem;
         }
 
         .stats-section {
-            padding: 4rem 0;
+            padding: 4rem 1rem;
             text-align: center;
             background: var(--primary);
             color: var(--accent);
@@ -334,17 +306,10 @@
             color: var(--secondary);
         }
 
-        .stat-item p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
         .faq-section {
-            padding: 4rem 0;
+            padding: 4rem 1rem;
             background: var(--accent);
-            border-radius: 10px;
             margin: 2rem 0;
-            box-shadow: var(--shadow);
         }
 
         .faq-grid {
@@ -353,19 +318,10 @@
         }
 
         .faq-item {
-            background: var(--light-gray);
             margin: 1rem 0;
             border-radius: 8px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .faq-item:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .faq-item.active {
-            border-color: var(--primary);
+            background: var(--light-gray);
+            overflow: hidden;
         }
 
         .faq-question {
@@ -423,58 +379,42 @@
         }
 
         .faq-answer {
+            padding: 0 1rem;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 1rem;
+            transition: max-height 0.3s ease, padding 0.3s ease;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 200px;
+            max-height: 500px;
             padding: 1rem;
         }
 
-        .faq-answer p {
-            color: #555;
-        }
-
         .reviews-section {
-            padding: 4rem 0;
+            padding: 4rem 1rem;
             text-align: center;
             background: var(--light-gray);
-        }
-
-        .review-counter {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--primary);
         }
 
         .review-slider-container {
             position: relative;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 2rem auto;
             overflow: hidden;
         }
 
         .review-slider {
             display: flex;
             transition: transform 0.5s ease;
+            width: 100%;
         }
 
         .review-card {
-            background: var(--accent);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 0, 0, 0.1);
             flex: 0 0 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-        }
-
-        .review-card:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-color: var(--secondary);
+            padding: 1.5rem;
+            background: var(--accent);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
         }
 
         .review-header {
@@ -495,11 +435,6 @@
             color: var(--dark);
             font-size: 1rem;
             font-weight: 600;
-        }
-
-        .review-card p {
-            color: #666;
-            font-size: 0.95rem;
         }
 
         .rating-stars i {
@@ -530,17 +465,15 @@
 
         .social-proof {
             text-align: center;
-            padding: 2rem 0;
+            padding: 2rem 1rem;
             color: var(--primary);
             font-weight: 600;
         }
 
         .contact-section {
-            padding: 4rem 0;
+            padding: 4rem 1rem;
             background: var(--accent);
-            border-radius: 10px;
             margin: 2rem 0;
-            box-shadow: var(--shadow);
         }
 
         .contact-form {
@@ -575,7 +508,7 @@
 
         footer {
             background: var(--primary);
-            padding: 2rem 0;
+            padding: 2rem 1rem;
             text-align: center;
             color: var(--accent);
             border-top: 4px solid var(--secondary);
@@ -586,6 +519,7 @@
             justify-content: center;
             gap: 1.5rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -612,6 +546,7 @@
             display: flex;
             justify-content: center;
             gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .time-segment {
@@ -636,7 +571,6 @@
         }
 
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -646,6 +580,11 @@
             z-index: 20;
             justify-content: center;
             align-items: center;
+            display: none;
+        }
+
+        .modal.active {
+            display: flex;
         }
 
         .modal-content {
@@ -655,21 +594,13 @@
             text-align: center;
             max-width: 400px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
 
         .modal-content h3 {
             color: var(--primary);
             font-weight: 700;
             margin-bottom: 1rem;
-        }
-
-        .modal-content p {
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-content .cta-button {
-            display: inline-flex;
         }
 
         .close-modal {
@@ -708,68 +639,27 @@
             background: var(--secondary);
         }
 
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: var(--primary);
-            color: var(--accent);
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            z-index: 15;
-            transition: var(--transition);
-        }
-
-        .chat-widget:hover {
-            background: var(--secondary);
-        }
-
-        .chat-widget i {
-            font-size: 1.2rem;
-        }
-
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .header p {
-                font-size: 1rem;
-            }
-            .cta-button {
-                padding: 1.2rem 2.5rem; /* Adjusted for mobile */
-                font-size: 1.4rem;
-            }
             .nav ul {
                 gap: 1rem;
-                flex-wrap: wrap;
-                padding: 0 1rem;
             }
-            .benefits-grid,
-            .stats-grid {
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1.2rem;
+            }
+            .progress-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            .benefits-grid, .stats-grid {
                 grid-template-columns: 1fr;
-            }
-            .section-title {
-                font-size: 1.8rem;
             }
             .review-slider-container {
                 max-width: 100%;
             }
-            .trust-badges,
-            .progress-steps,
-            .share-buttons {
+            .trust-badges, .share-buttons {
                 flex-direction: column;
                 gap: 1rem;
-            }
-            .step-item {
-                width: 80px;
-            }
-            .chat-widget {
-                bottom: 70px;
             }
         }
     </style>
@@ -796,47 +686,23 @@
     <main>
         <section class="cta-section">
             <div class="progress-steps">
-                <div class="step-item">
-                    <div class="step-circle">1</div>
-                    <p>Take Survey</p>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">2</div>
-                    <p>Verify Details</p>
-                </div>
-                <div class="step-item">
-                    <div class="step-circle">3</div>
-                    <p>Claim Reward</p>
-                </div>
+                <div class="step-item"><div class="step-circle">1</div><p>Take Survey</p></div>
+                <div class="step-item"><div class="step-circle">2</div><p>Verify Details</p></div>
+                <div class="step-item"><div class="step-circle">3</div><p>Claim Reward</p></div>
             </div>
             <div class="timer-container">
                 <p class="timer-text">Offer Expires In:</p>
                 <div class="timer">
-                    <div class="time-segment">
-                        <span id="days">00</span>
-                        <span class="time-label">Days</span>
-                    </div>
-                    <div class="time-segment">
-                        <span id="hours">00</span>
-                        <span class="time-label">Hours</span>
-                    </div>
-                    <div class="time-segment">
-                        <span id="minutes">00</span>
-                        <span class="time-label">Minutes</span>
-                    </div>
-                    <div class="time-segment">
-                        <span id="seconds">00</span>
-                        <span class="time-label">Seconds</span>
-                    </div>
+                    <div class="time-segment"><span id="days">00</span><span class="time-label">Days</span></div>
+                    <div class="time-segment"><span id="hours">00</span><span class="time-label">Hours</span></div>
+                    <div class="time-segment"><span id="minutes">00</span><span class="time-label">Minutes</span></div>
+                    <div class="time-segment"><span id="seconds">00</span><span class="time-label">Seconds</span></div>
                 </div>
             </div>
             <a href="https://smrturl.co/a/s94fe5e08ab/849?s1=" class="cta-button" target="_blank">
-                <i class="fas fa-gift"></i>
-                Claim Your Gift Card
+                <i class="fas fa-gift"></i> Claim Your Gift Card
             </a>
-            <div class="progress-bar">
-                <div class="progress"></div>
-            </div>
+            <div class="progress-bar"><div class="progress"></div></div>
             <div class="trust-badges">
                 <div class="trust-badge"><i class="fas fa-lock"></i> Secure Process</div>
                 <div class="trust-badge"><i class="fas fa-check-circle"></i> Verified Offer</div>
@@ -847,7 +713,7 @@
             </div>
         </section>
 
-        <section class="benefits-section">
+        <section class="benefits-section" id="benefits">
             <div class="container">
                 <h2 class="section-title">Why Claim Your Gift Card?</h2>
                 <div class="benefits-grid">
@@ -874,18 +740,9 @@
             <div class="container">
                 <h2 class="section-title">Our Impact</h2>
                 <div class="stats-grid">
-                    <div class="stat-item">
-                        <h3>10,000+</h3>
-                        <p>Satisfied Users</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>1,234</h3>
-                        <p>Gift Cards Claimed</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>2 Min</h3>
-                        <p>Survey Time</p>
-                    </div>
+                    <div class="stat-item"><h3>10,000+</h3><p>Satisfied Users</p></div>
+                    <div class="stat-item"><h3>1,234</h3><p>Gift Cards Claimed</p></div>
+                    <div class="stat-item"><h3>2 Min</h3><p>Survey Time</p></div>
                 </div>
             </div>
         </section>
@@ -899,31 +756,16 @@
                 <h2 class="section-title">Frequently Asked Questions</h2>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <h3>How do I qualify?</h3>
-                            <div class="faq-icon"></div>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Complete our quick 2-minute survey to qualify for your $150 McDonald's gift card.</p>
-                        </div>
+                        <button class="faq-question"><h3>How do I qualify?</h3><div class="faq-icon"></div></button>
+                        <div class="faq-answer"><p>Complete our quick 2-minute survey to qualify for your $150 McDonald's gift card.</p></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <h3>Is there a cost?</h3>
-                            <div class="faq-icon"></div>
-                        </button>
-                        <div class="faq-answer">
-                            <p>No cost involved! Simply complete the survey to claim your reward.</p>
-                        </div>
+                        <button class="faq-question"><h3>Is there a cost?</h3><div class="faq-icon"></div></button>
+                        <div class="faq-answer"><p>No cost involved! Simply complete the survey to claim your reward.</p></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question">
-                            <h3>How do I receive it?</h3>
-                            <div class="faq-icon"></div>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Digital gift cards are emailed within 10-30 minutes. Physical cards ship in 3-5 business days.</p>
-                        </div>
+                        <button class="faq-question"><h3>How do I receive it?</h3><div class="faq-icon"></div></button>
+                        <div class="faq-answer"><p>Digital gift cards are emailed within 10-30 minutes. Physical cards ship in 3-5 business days.</p></div>
                     </div>
                 </div>
             </section>
@@ -1001,8 +843,7 @@
             <h3>Don’t Miss Out!</h3>
             <p>Claim your $150 McDonald's gift card before the offer expires.</p>
             <a href="https://smrturl.co/a/s94fe5e08ab/849?s1=" class="cta-button" target="_blank">
-                <i class="fas fa-gift"></i>
-                Claim Now
+                <i class="fas fa-gift"></i> Claim Now
             </a>
         </div>
     </div>
@@ -1011,44 +852,24 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <div class="chat-widget" id="chat-widget">
-        <i class="fas fa-comment"></i>
-        <span>Chat with Us</span>
-    </div>
-
     <script>
         // Timer
         const targetDate = new Date('March 1, 2025 23:59:59').getTime();
-        const daysElement = document.getElementById('days');
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
-
-        function updateTimer() {
+        const updateTimer = () => {
             const now = new Date().getTime();
-            const diff = targetDate - now;
-
+            const diff = Math.max(targetDate - now, 0);
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-            daysElement.textContent = String(days).padStart(2, '0');
-            hoursElement.textContent = String(hours).padStart(2, '0');
-            minutesElement.textContent = String(minutes).padStart(2, '0');
-            secondsElement.textContent = String(seconds).padStart(2, '0');
-
-            if (diff <= 0) {
-                clearInterval(timerInterval);
-                daysElement.textContent = '00';
-                hoursElement.textContent = '00';
-                minutesElement.textContent = '00';
-                secondsElement.textContent = '00';
-            }
-        }
-
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        };
         updateTimer();
-        const timerInterval = setInterval(updateTimer, 1000);
+        setInterval(updateTimer, 1000);
 
         // FAQ Toggle
         document.querySelectorAll('.faq-question').forEach(button => {
@@ -1058,14 +879,11 @@
             });
         });
 
-        // Smooth Scroll for Navigation
+        // Smooth Scroll
         document.querySelectorAll('.nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
 
@@ -1077,79 +895,52 @@
             claimCountElement.textContent = claimCount.toLocaleString();
         }, 5000);
 
-        // Review Slider and Counter
+        // Review Slider
         const slider = document.querySelector('.review-slider');
-        const sliderContainer = document.querySelector('.review-slider-container');
+        const slides = document.querySelectorAll('.review-card');
         const dots = document.querySelectorAll('.slider-dot');
         let currentSlide = 0;
-        const slideCount = 3;
 
-        function updateSlider() {
-            const slideWidth = sliderContainer.offsetWidth;
-            slider.style.transform = translateX(-${currentSlide * slideWidth}px);
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
+        const updateSlider = () => {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+        };
 
-        dots.forEach((dot, index) => {
+        dots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
-                currentSlide = index;
+                currentSlide = i;
                 updateSlider();
             });
         });
 
         setInterval(() => {
-            currentSlide = (currentSlide + 1) % slideCount;
+            currentSlide = (currentSlide + 1) % slides.length;
             updateSlider();
         }, 5000);
 
         window.addEventListener('resize', updateSlider);
         updateSlider();
 
-        // Modal Popup
+        // Modal
         const modal = document.getElementById('cta-modal');
-        const closeModal = document.querySelector('.close-modal');
-
-        setTimeout(() => {
-            modal.style.display = 'flex';
-        }, 5000);
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
+        setTimeout(() => modal.classList.add('active'), 5000);
+        document.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) modal.classList.remove('active');
         });
 
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Contact Form Submission
+        // Contact Form
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('Thank you for your message! Our team will respond soon.');
         });
 
-        // Back-to-Top Button
+        // Back-to-Top
         const backToTop = document.getElementById('back-to-top');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
+            backToTop.classList.toggle('visible', window.scrollY > 300);
         });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Chat Widget (Placeholder)
-        const chatWidget = document.getElementById('chat-widget');
-        chatWidget.addEventListener('click', () => {
-            alert('Live chat coming soon! For now, please use the contact form.');
-        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
 </body>
 </html>
