@@ -9,25 +9,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script>
         // Redirect from in-app browsers to external browsers
-        (function() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            const currentUrl = window.location.href;
-            const isInAppBrowser = /fb|facebook|instagram|tiktok|twitter|x\.com|snapchat|linkedin|whatsapp|line/i.test(userAgent);
+(function() {
+    function isInAppBrowser() {
+        let ua = navigator.userAgent || navigator.vendor || window.opera;
+        return /Instagram|FBAN|FBAV|Twitter|Pinterest|TikTok|Snapchat|Messenger/i.test(ua);
+    }
 
-            if (isInAppBrowser) {
-                const isAndroid = /android/i.test(userAgent);
-                const isIOS = /iphone|ipad|ipod/i.test(userAgent);
+    function openInExternalBrowser() {
+        if (sessionStorage.getItem("redirected")) return; // Prevent infinite loops
+        sessionStorage.setItem("redirected", "true");
 
-                if (isAndroid) {
-                    window.location.href = "googlechrome://" + currentUrl.replace(/^https?:\/\//, '');
-                } else if (isIOS) {
-                    window.location.href = "x-web-search://" + currentUrl.replace(/^https?:\/\//, '');
-                    setTimeout(() => {
-                        window.location.href = currentUrl;
-                    }, 1000);
-                }
-            }
-        })();
+        let url = window.location.href;
+        let isAndroid = /Android/i.test(navigator.userAgent);
+        let isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        if (isAndroid) {
+            window.location.href = "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
+        } else if (isIOS) {
+            setTimeout(() => {
+                window.location.href = url; // Fallback in case Safari redirection fails
+            }, 500);
+            window.location.href = "googlechrome://" + url.replace(/^https?:\/\//, ""); // Tries Chrome first
+        } else {
+            window.open(url, "_blank"); // Default fallback
+        }
+    }
+
+    if (isInAppBrowser()) {
+        openInExternalBrowser();
+    }
+})();
     </script>
     <style>
         :root {
