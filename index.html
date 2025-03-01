@@ -4,51 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Claim Your McDonald's Gift Card</title>
-    <meta name="description" content="Claim your exclusive $150 McDonald's gift card by participating in our quick survey. Limited time offer!">
+    <meta name="description" content="Claim your exclusive $100 McDonald's gift card by participating in our quick survey. Limited time offer!">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <script>
         // Redirect from in-app browsers to external browsers
-(function() {
-    function isInAppBrowser() {
-        let ua = navigator.userAgent || navigator.vendor || window.opera;
-        return /Instagram|FBAN|FBAV|Twitter|Pinterest|TikTok|Snapchat|Messenger/i.test(ua);
-    }
+        (function() {
+            function isInAppBrowser() {
+                let ua = navigator.userAgent || navigator.vendor || window.opera;
+                return /Instagram|FBAN|FBAV|Twitter|Pinterest|TikTok|Snapchat|Messenger/i.test(ua);
+            }
 
-    function openInExternalBrowser() {
-        if (sessionStorage.getItem("redirected")) return; // Prevent infinite loops
-        sessionStorage.setItem("redirected", "true");
+            function openInExternalBrowser() {
+                if (sessionStorage.getItem("redirected")) return;
+                sessionStorage.setItem("redirected", "true");
 
-        let url = window.location.href;
-        let isAndroid = /Android/i.test(navigator.userAgent);
-        let isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+                let url = window.location.href;
+                let isAndroid = /Android/i.test(navigator.userAgent);
+                let isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-        if (isAndroid) {
-            window.location.href = "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
-        } else if (isIOS) {
-            setTimeout(() => {
-                window.location.href = url; // Fallback in case Safari redirection fails
-            }, 500);
-            window.location.href = "googlechrome://" + url.replace(/^https?:\/\//, ""); // Tries Chrome first
-        } else {
-            window.open(url, "_blank"); // Default fallback
-        }
-    }
+                if (isAndroid) {
+                    window.location.href = "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
+                } else if (isIOS) {
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 500);
+                    window.location.href = "googlechrome://" + url.replace(/^https?:\/\//, "");
+                } else {
+                    window.open(url, "_blank");
+                }
+            }
 
-    if (isInAppBrowser()) {
-        openInExternalBrowser();
-    }
-})();
+            if (isInAppBrowser()) {
+                openInExternalBrowser();
+            }
+        })();
     </script>
     <style>
         :root {
-            --primary: #DA291C; /* McDonald's Red */
-            --secondary: #FFC107; /* McDonald's Yellow */
-            --accent: #FFFFFF; /* White */
-            --dark: #212121; /* Dark Gray/Black */
-            --light-gray: #F5F5F5; /* Light Gray */
+            --primary: #D62300; /* McDonald's red */
+            --secondary: #FFC107; /* McDonald's yellow */
+            --accent: #FFFFFF;
+            --dark: #1A1A1A;
+            --light-gray: #F0F0F0;
             --transition: all 0.3s ease-in-out;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, #D62300, #FFC107);
         }
 
         * {
@@ -61,16 +62,17 @@
         body {
             background: var(--light-gray);
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             font-size: 16px;
+            letter-spacing: 0.2px;
         }
 
         .nav {
             position: sticky;
             top: 0;
-            background: var(--primary);
-            padding: 1rem;
+            background: var(--gradient);
+            padding: 1.5rem;
             z-index: 10;
             box-shadow: var(--shadow);
         }
@@ -78,7 +80,7 @@
         .nav ul {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
             flex-wrap: wrap;
         }
@@ -87,60 +89,133 @@
             color: var(--accent);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
             transition: var(--transition);
         }
 
-        .nav a:hover {
-            color: var(--secondary);
+        .nav a:hover:after {
+            width: 100%;
         }
 
         .header {
-            background: var(--primary);
-            padding: 4rem 1rem;
+            background: var(--gradient);
+            padding: 5rem 1rem;
             text-align: center;
             color: var(--accent);
-            border-bottom: 4px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
         }
 
+        .header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 10s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        .header-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-icon {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .float-icon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .float-icon:nth-child(2) { left: 80%; top: 30%; animation-delay: 2s; }
+        .float-icon:nth-child(3) { left: 40%; top: 70%; animation-delay: 4s; }
+
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
         }
 
         .logo {
-            width: 80px;
-            margin-bottom: 1rem;
-            filter: brightness(1.1);
+            width: 140px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
         .header h1 {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-size: clamp(2rem, 6vw, 3rem);
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .header p {
-            font-size: clamp(1rem, 3vw, 1.2rem);
-            opacity: 0.9;
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            opacity: 0.95;
+            font-weight: 500;
         }
 
         .cta-section {
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             background: var(--accent);
-            border-radius: 10px;
-            margin: 2rem auto;
-            max-width: 800px;
+            border-radius: 15px;
+            margin: 3rem auto;
+            max-width: 900px;
             box-shadow: var(--shadow);
+            position: relative;
         }
 
         .progress-steps {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
             flex-wrap: wrap;
         }
 
@@ -148,146 +223,207 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 80px;
+            min-width: 100px;
+            transition: var(--transition);
+        }
+
+        .step-item:hover {
+            transform: translateY(-5px);
         }
 
         .step-circle {
-            width: 40px;
-            height: 40px;
-            background: var(--secondary);
-            color: var(--dark);
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            color: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 2px 5px rgba(214, 35, 0, 0.3);
         }
 
         .step-item p {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--dark);
+            font-weight: 500;
         }
 
         .progress-bar {
-            width: 200px;
-            height: 4px;
+            width: 250px;
+            height: 6px;
             background: rgba(0, 0, 0, 0.1);
-            border-radius: 4px;
-            margin: 1rem auto;
+            border-radius: 3px;
+            margin: 1.5rem auto;
             overflow: hidden;
         }
 
         .progress {
             width: 0;
             height: 100%;
-            background: var(--primary);
+            background: var(--gradient);
             animation: load 2s ease-in-out infinite;
         }
 
         @keyframes load {
             0% { width: 0; }
-            50% { width: 70%; }
+            50% { width: 80%; }
             100% { width: 0; }
         }
 
         .cta-button {
-            background: linear-gradient(135deg, var(--secondary), #FFB300);
-            color: var(--dark);
-            padding: 1.5rem 3rem;
-            font-size: 1.4rem;
+            background: linear-gradient(135deg, #FF4500, #D62300);
+            color: var(--accent);
+            padding: 1.5rem 3.5rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            border: 3px solid var(--primary);
-            border-radius: 15px;
+            border: 3px solid var(--accent);
+            border-radius: 50px;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            box-shadow: 0 8px 20px rgba(218, 41, 28, 0.3);
+            box-shadow: 0 10px 25px rgba(214, 35, 0, 0.4);
             position: relative;
             overflow: hidden;
+            animation: pulseButton 2s infinite;
+        }
+
+        @keyframes pulseButton {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            transition: var(--transition);
+        }
+
+        .cta-button:hover:before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            background: linear-gradient(135deg, #FFB300, var(--secondary));
-            transform: scale(1.05);
-            box-shadow: 0 12px 25px rgba(218, 41, 28, 0.5);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(214, 35, 0, 0.5);
+            animation: none;
         }
 
         .cta-button i {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
+        }
+
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #FF4500, #D62300);
+            color: var(--accent);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(214, 35, 0, 0.4);
+            z-index: 15;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sticky-cta:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(214, 35, 0, 0.5);
         }
 
         .trust-badges {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+            gap: 2.5rem;
+            margin-top: 2.5rem;
             flex-wrap: wrap;
         }
 
         .trust-badge {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             color: var(--primary);
             font-weight: 600;
+            font-size: 1.1rem;
+            background: rgba(214, 35, 0, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
         }
 
         .trust-badge i {
-            color: var(--secondary);
-            font-size: 1.2rem;
+            color: var(--primary);
+            font-size: 1.3rem;
         }
 
         .share-buttons {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 1.2rem;
+            margin-top: 2rem;
             flex-wrap: wrap;
         }
 
         .share-button {
             background: var(--primary);
             color: var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .share-button:hover {
             background: var(--secondary);
-            color: var(--dark);
+            transform: translateY(-3px);
         }
 
-        /* Countdown Timer Styles */
         .timer-container {
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, var(--primary), #B71C1C);
-            padding: 1.5rem;
-            border-radius: 10px;
+            margin-bottom: 2.5rem;
+            background: var(--gradient);
+            padding: 2rem;
+            border-radius: 15px;
             box-shadow: var(--shadow);
             position: relative;
+            overflow: hidden;
         }
 
         .timer-text {
             color: var(--accent);
             font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .timer {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 2rem;
             flex-wrap: wrap;
         }
 
@@ -295,19 +431,20 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100px;
+            width: 110px;
             position: relative;
         }
 
         .time-icon {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
         }
 
         .flip-card {
-            width: 80px;
-            height: 40px;
+            width: 90px;
+            height: 50px;
             perspective: 1000px;
             position: relative;
         }
@@ -320,9 +457,9 @@
             transition: transform 0.6s;
             transform-style: preserve-3d;
             background: var(--accent);
-            border: 2px solid var(--secondary);
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: 3px solid var(--secondary);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .flip-card.flipping .flip-card-inner {
@@ -337,7 +474,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--primary);
         }
@@ -347,124 +484,142 @@
         }
 
         .time-label {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: var(--accent);
             text-transform: uppercase;
-            margin-top: 0.5rem;
+            margin-top: 0.8rem;
             font-weight: 600;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
+        .benefits-section, .stats-section, .faq-section, .reviews-section, .contact-section {
+            padding: 5rem 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .benefits-section {
-            padding: 4rem 1rem;
             background: var(--light-gray);
             text-align: center;
         }
 
         .section-title {
-            font-size: clamp(1.8rem, 4vw, 2rem);
+            font-size: clamp(2rem, 5vw, 2.5rem);
             font-weight: 700;
             color: var(--primary);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .section-title:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background: var(--secondary);
+            width: 70px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
         }
 
         .benefit-item {
-            padding: 2rem;
+            padding: 2.5rem;
             background: var(--accent);
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
         .benefit-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
         .benefit-item i {
-            font-size: 2rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
         }
 
         .benefit-item h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary);
+            margin-bottom: 0.8rem;
         }
 
         .stats-section {
-            padding: 4rem 1rem;
-            text-align: center;
-            background: var(--primary);
+            background: var(--gradient);
+            color: var(--accent);
+        }
+
+        .stats-section .section-title {
             color: var(--accent);
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
         }
 
         .stat-item h3 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--secondary);
+            color: var(--accent);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Enhanced FAQ Section Styles */
         .faq-section {
-            padding: 4rem 1rem;
-            background: linear-gradient(135deg, var(--primary), #B71C1C);
+            background: var(--gradient);
             color: var(--accent);
-            border-radius: 10px;
-            margin: 2rem 0;
+            border-radius: 15px;
+            margin: 3rem 0;
             box-shadow: var(--shadow);
         }
 
         .faq-section .section-title {
-            color: var(--accent); /* Changed to white for readability */
+            color: var(--accent);
         }
 
         .faq-grid {
-            max-width: 900px;
-            margin: 0 auto;
+            max-width: 1000px;
+            margin: 2rem auto 0;
         }
 
         .faq-item {
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             background: var(--accent);
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s ease;
-            border: 2px solid var(--secondary);
+            transition: var(--transition);
+            border: 3px solid var(--secondary);
         }
 
         .faq-item:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         .faq-question {
-            padding: 1.5rem;
+            padding: 1.8rem;
             background: none;
             border: none;
             text-align: left;
@@ -473,47 +628,55 @@
             width: 100%;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 1.2rem;
+            gap: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
         .faq-question i {
-            color: var(--secondary);
-            font-size: 1.5rem;
+            color: var(--primary);
+            font-size: 1.8rem;
         }
 
         .faq-answer {
-            padding: 0 1.5rem;
+            padding: 0 1.8rem;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease, padding 0.5s ease;
             color: var(--dark);
             background: var(--light-gray);
+            font-size: 1.1rem;
         }
 
         .faq-item.active .faq-answer {
-            max-height: 200px;
-            padding: 1.5rem;
+            max-height: 250px;
+            padding: 1.8rem;
         }
 
-        /* Enhanced Reviews Section Styles */
         .reviews-section {
-            padding: 4rem 1rem;
-            text-align: center;
             background: var(--light-gray);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reviews-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(214, 35, 0, 0.05), rgba(0, 0, 0, 0.05));
+            z-index: 1;
         }
 
         .review-slider-container {
-            position: relative;
-            max-width: 700px;
-            margin: 2rem auto;
+            max-width: 900px;
+            margin: 3rem auto;
             padding: 2rem;
-            background: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'), var(--accent);
-            border-radius: 20px;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), var(--shadow);
-            overflow: hidden;
-            border: 4px solid var(--primary);
+            position: relative;
+            z-index: 2;
         }
 
         .review-slider {
@@ -524,67 +687,171 @@
 
         .review-card {
             flex: 0 0 100%;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+            background: var(--accent);
+            border-radius: 20px;
+            padding: 2.5rem;
             box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
             position: relative;
-            animation: scanline 4s infinite linear;
+            overflow: hidden;
         }
 
-        @keyframes scanline {
-            0% { background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)); }
-            50% { background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0)); }
-            100% { background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)); }
+        .review-card:hover {
+            transform: perspective(1000px) rotateY(5deg) scale(1.02);
+        }
+
+        .review-card:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(214, 35, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .review-card:hover:before {
+            opacity: 1;
         }
 
         .review-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            position: relative;
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .review-header img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 3px solid var(--secondary);
-            transition: transform 0.3s ease;
+        .review-avatar {
             position: relative;
+            width: 90px;
+            height: 90px;
+            transition: var(--transition);
+        }
+
+        .review-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        .review-avatar:before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: calc(100% + 12px);
+            height: calc(100% + 12px);
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), #FF4500);
+            z-index: 1;
+            animation: pulseRing 2s infinite;
+        }
+
+        .review-avatar:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--accent);
             z-index: 1;
         }
 
-        .review-card:hover .review-header img {
-            transform: scale(1.1) translateY(-10px);
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+
+        .review-card:hover .review-avatar {
+            transform: translateY(-5px);
         }
 
         .review-header h4 {
-            color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
         }
 
         .review-header i {
-            color: var(--secondary);
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .review-card p {
             font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
         }
 
         .rating-stars {
-            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
         .rating-stars i {
-            color: var(--secondary);
-            font-size: 1.2rem;
+            color: #ffd700;
+            font-size: 1.6rem;
+            opacity: 0;
+            animation: starFadeIn 0.5s ease forwards;
+        }
+
+        .rating-stars i:nth-child(1) { animation-delay: 0.1s; }
+        .rating-stars i:nth-child(2) { animation-delay: 0.2s; }
+        .rating-stars i:nth-child(3) { animation-delay: 0.3s; }
+        .rating-stars i:nth-child(4) { animation-delay: 0.4s; }
+        .rating-stars i:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes starFadeIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .slider-controls {
             display: flex;
             justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slider-arrow {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .slider-arrow:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .slider-dots {
+            display: flex;
             gap: 1rem;
-            margin-top: 1.5rem;
         }
 
         .slider-dot {
@@ -593,84 +860,106 @@
             background: var(--primary);
             border-radius: 50%;
             cursor: pointer;
-            opacity: 0.5;
+            opacity: 0.6;
             transition: var(--transition);
         }
 
         .slider-dot.active {
             opacity: 1;
             background: var(--secondary);
-            transform: scale(1.2);
+            transform: scale(1.3);
+        }
+
+        .review-counter {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 1rem;
         }
 
         .social-proof {
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             color: var(--primary);
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: rgba(214, 35, 0, 0.1);
+            margin: 2rem 0;
+            border-radius: 10px;
         }
 
         .contact-section {
-            padding: 4rem 1rem;
             background: var(--accent);
-            margin: 2rem 0;
+            margin: 3rem 0;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
         }
 
         .contact-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             display: grid;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .contact-form input,
         .contact-form textarea {
-            padding: 1rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 6px;
-            font-size: 1rem;
+            padding: 1.2rem;
+            border: 2px solid rgba(214, 35, 0, 0.2);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 8px rgba(214, 35, 0, 0.3);
         }
 
         .contact-form button {
-            background: var(--primary);
+            background: var(--gradient);
             color: var(--accent);
-            padding: 1rem;
+            padding: 1.2rem;
             border: none;
-            border-radius: 6px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: var(--transition);
         }
 
         .contact-form button:hover {
             background: var(--secondary);
-            color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
         }
 
         footer {
-            background: var(--primary);
-            padding: 2rem 1rem;
+            background: var(--gradient);
+            padding: 3rem 1rem;
             text-align: center;
             color: var(--accent);
-            border-top: 4px solid var(--secondary);
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1rem;
+            gap: 2rem;
+            margin-top: 1.5rem;
             flex-wrap: wrap;
         }
 
         .footer-links a {
             color: var(--accent);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             transition: var(--transition);
         }
 
         .footer-links a:hover {
             color: var(--secondary);
+            transform: scale(1.2);
         }
 
         .modal {
@@ -679,59 +968,80 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 20;
             justify-content: center;
             align-items: center;
             display: none;
+            backdrop-filter: blur(3px);
         }
 
         .modal.active {
             display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
             background: var(--accent);
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: 15px;
             text-align: center;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
         }
 
         .modal-content h3 {
             color: var(--primary);
             font-weight: 700;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
         }
 
         .close-modal {
             position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.5rem;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
             color: var(--dark);
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
         }
 
         .back-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
+            bottom: 80px;
+            right: 30px;
+            background: var(--gradient);
             color: var(--accent);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
             opacity: 0;
             transition: var(--transition);
             z-index: 15;
+            box-shadow: var(--shadow);
         }
 
         .back-to-top.visible {
@@ -740,57 +1050,34 @@
 
         .back-to-top:hover {
             background: var(--secondary);
+            transform: scale(1.1);
         }
 
         @media (max-width: 768px) {
-            .nav ul {
-                gap: 1rem;
-            }
-            .cta-button {
-                padding: 1rem 2rem;
-                font-size: 1.2rem;
-            }
-            .progress-steps {
-                flex-direction: column;
-                align-items: center;
-            }
-            .benefits-grid, .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .timer {
-                gap: 1rem;
-            }
-            .time-segment {
-                width: 80px;
-            }
-            .flip-card {
-                width: 60px;
-                height: 30px;
-            }
-            .flip-card-front, .flip-card-back {
-                font-size: 1.4rem;
-            }
-            .time-icon {
-                font-size: 1.5rem;
-            }
-            .time-label {
-                font-size: 0.8rem;
-            }
-            .review-slider-container {
-                max-width: 100%;
-                padding: 1rem;
-            }
-            .review-header img {
-                width: 50px;
-                height: 50px;
-            }
-            .faq-question {
-                font-size: 1rem;
-                padding: 1rem;
-            }
-            .faq-item.active .faq-answer {
-                max-height: 300px;
-            }
+            .nav ul { gap: 1.5rem; }
+            .nav a { font-size: 1rem; }
+            .cta-button { padding: 1.2rem 2.5rem; font-size: 1.3rem; }
+            .progress-steps { flex-direction: column; align-items: center; gap: 2rem; }
+            .benefits-grid, .stats-grid { grid-template-columns: 1fr; }
+            .timer { gap: 1.5rem; }
+            .time-segment { width: 90px; }
+            .flip-card { width: 70px; height: 40px; }
+            .flip-card-front, .flip-card-back { font-size: 1.6rem; }
+            .time-icon { font-size: 1.8rem; }
+            .time-label { font-size: 0.9rem; }
+            .review-slider-container { max-width: 100%; padding: 1.5rem; }
+            .review-avatar { width: 70px; height: 70px; }
+            .review-avatar:before { width: 82px; height: 82px; top: -6px; left: -6px; }
+            .review-avatar:after { width: 70px; height: 70px; top: 0; left: 0; }
+            .review-avatar img { width: 70px; height: 70px; top: 0; left: 0; }
+            .review-header h4 { font-size: 1.4rem; }
+            .review-card p { font-size: 1rem; }
+            .rating-stars i { font-size: 1.4rem; }
+            .faq-question { font-size: 1.1rem; padding: 1.5rem; }
+            .faq-item.active .faq-answer { max-height: 350px; }
+            .section-title { font-size: 1.8rem; }
+            .sticky-cta { padding: 0.8rem 1.5rem; font-size: 1rem; }
+            .slider-arrow { width: 30px; height: 30px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -806,10 +1093,17 @@
     </nav>
 
     <header class="header" id="home">
+        <div class="floating-elements">
+            <i class="fas fa-hamburger float-icon"></i>
+            <i class="fas fa-french-fries float-icon"></i>
+            <i class="fas fa-coffee float-icon"></i>
+        </div>
         <div class="container">
-            <img src="https://www.mcdonalds.ma/mcdelivery/images/logo.png" alt="McDonald's" class="logo">
-            <h1>Claim Your McDonald's Gift Card</h1>
-            <p>Exclusive Offer - $150 Value</p>
+            <div class="header-content">
+                <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/13948539-logo-mcdonald-s-sur-fond-blanc-transparent-gratuit-vectoriel.jpg" alt="McDonald's" class="logo">
+                <h1>Claim Your McDonald's Gift Card</h1>
+                <p>Exclusive Offer - $100 Value</p>
+            </div>
         </div>
     </header>
 
@@ -821,7 +1115,7 @@
                 <div class="step-item"><div class="step-circle">3</div><p>Claim Reward</p></div>
             </div>
             <div class="timer-container">
-                <p class="timer-text">Order Up Before It’s Gone!</p>
+                <p class="timer-text">Eat Before It’s Gone!</p>
                 <div class="timer">
                     <div class="time-segment">
                         <i class="fas fa-hamburger time-icon"></i>
@@ -844,7 +1138,7 @@
                         <span class="time-label">Hours</span>
                     </div>
                     <div class="time-segment">
-                        <i class="fas fa-glass-whiskey time-icon"></i>
+                        <i class="fas fa-french-fries time-icon"></i>
                         <div class="flip-card" id="minutes-card">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front" id="minutes-front">00</div>
@@ -854,7 +1148,7 @@
                         <span class="time-label">Minutes</span>
                     </div>
                     <div class="time-segment">
-                        <i class="fas fa-ice-cream time-icon"></i>
+                        <i class="fas fa-coffee time-icon"></i>
                         <div class="flip-card" id="seconds-card">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front" id="seconds-front">00</div>
@@ -875,7 +1169,7 @@
             </div>
             <div class="share-buttons">
                 <a href="https://facebook.com/sharer/sharer.php?u=https://example.com" class="share-button" target="_blank"><i class="fab fa-facebook-f"></i> Share</a>
-                <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Claim%20your%20$150%20McDonald%27s%20gift%20card!" class="share-button" target="_blank"><i class="fab fa-twitter"></i> Tweet</a>
+                <a href="https://twitter.com/intent/tweet?url=https://example.com&text=Claim%20your%20$100%20McDonald%27s%20gift%20card!" class="share-button" target="_blank"><i class="fab fa-twitter"></i> Tweet</a>
             </div>
         </section>
 
@@ -885,8 +1179,8 @@
                 <div class="benefits-grid">
                     <div class="benefit-item">
                         <i class="fas fa-dollar-sign"></i>
-                        <h3>Free $150 Value</h3>
-                        <p>Enjoy a $150 McDonald's gift card at no cost to you.</p>
+                        <h3>Free $100 Value</h3>
+                        <p>Enjoy a $100 McDonald's gift card at no cost to you.</p>
                     </div>
                     <div class="benefit-item">
                         <i class="fas fa-clock"></i>
@@ -896,7 +1190,7 @@
                     <div class="benefit-item">
                         <i class="fas fa-envelope"></i>
                         <h3>Fast Delivery</h3>
-                        <p>Digital card in 10-30 minutes, physical in 3-5 days.</p>
+                        <p>Digital code delivered within 10-30 minutes.</p>
                     </div>
                 </div>
             </div>
@@ -906,15 +1200,15 @@
             <div class="container">
                 <h2 class="section-title">Our Impact</h2>
                 <div class="stats-grid">
-                    <div class="stat-item"><h3>10,000+</h3><p>Satisfied Users</p></div>
-                    <div class="stat-item"><h3>1,234</h3><p>Gift Cards Claimed</p></div>
+                    <div class="stat-item"><h3>15,000+</h3><p>Satisfied Users</p></div>
+                    <div class="stat-item"><h3>2,500</h3><p>Gift Cards Claimed</p></div>
                     <div class="stat-item"><h3>2 Min</h3><p>Survey Time</p></div>
                 </div>
             </div>
         </section>
 
         <div class="social-proof">
-            <p><span id="claim-count">1,234</span> Customers Have Claimed Their Gift Card!</p>
+            <p><span id="claim-count">2,500</span> Customers Have Claimed Their Gift Card!</p>
         </div>
 
         <div class="container">
@@ -923,15 +1217,15 @@
                 <div class="faq-grid">
                     <div class="faq-item">
                         <button class="faq-question"><i class="fas fa-question-circle"></i> How do I qualify?</button>
-                        <div class="faq-answer"><p>Complete our quick 2-minute survey to qualify for your $150 McDonald's gift card.</p></div>
+                        <div class="faq-answer"><p>Complete our quick 2-minute survey to qualify for your $100 McDonald's gift card.</p></div>
                     </div>
                     <div class="faq-item">
                         <button class="faq-question"><i class="fas fa-dollar-sign"></i> Is there a cost?</button>
                         <div class="faq-answer"><p>No cost involved! Simply complete the survey to claim your reward.</p></div>
                     </div>
                     <div class="faq-item">
-                        <button class="faq-question"><i class="fas fa-truck"></i> How do I receive it?</button>
-                        <div class="faq-answer"><p>Digital gift cards are emailed within 10-30 minutes. Physical cards ship in 3-5 business days.</p></div>
+                        <button class="faq-question"><i class="fas fa-envelope"></i> How do I receive it?</button>
+                        <div class="faq-answer"><p>Your digital McDonald's gift card code will be emailed within 10-30 minutes.</p></div>
                     </div>
                 </div>
             </section>
@@ -942,42 +1236,58 @@
                     <div class="review-slider">
                         <div class="review-card">
                             <div class="review-header">
-                                <img src="https://cdn1.booknode.com/author_picture/5048/full/sarah-rivens-5047808.jpg" alt="Sarah J.">
-                                <h4>Sarah J. <i class="fab fa-instagram"></i></h4>
+                                <div class="review-avatar">
+                                    <img src="https://cdn1.booknode.com/author_picture/5048/full/sarah-rivens-5047808.jpg" alt="Sarah J.">
+                                </div>
+                                <div>
+                                    <h4>Sarah J. <i class="fab fa-instagram"></i></h4>
+                                </div>
                             </div>
-                            <p>"The process was seamless and professional. Received my gift card quickly—highly recommend!"</p>
+                            <p>"Super easy process! Got my McDonald's gift card fast—perfect for fries!"</p>
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
                         <div class="review-card">
                             <div class="review-header">
-                                <img src="https://www.nairaland.com/attachments/11187037_ef80d8b9f443869818b4a7d1f630a979_webp5b33600d99bf43a457aa1427c9143ee7" alt="Michael R.">
-                                <h4>Michael R. <i class="fab fa-twitter"></i></h4>
+                                <div class="review-avatar">
+                                    <img src="https://www.nairaland.com/attachments/11187037_ef80d8b9f443869818b4a7d1f630a979_webp5b33600d99bf43a457aa1427c9143ee7" alt="Michael R.">
+                                </div>
+                                <div>
+                                    <h4>Michael R. <i class="fab fa-twitter"></i></h4>
+                                </div>
                             </div>
-                            <p>"Efficient and straightforward. Used my gift card the same day—great experience!"</p>
+                            <p>"Loved how quick it was. Now I can enjoy my Big Mac anytime!"</p>
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
                         <div class="review-card">
                             <div class="review-header">
-                                <img src="https://photoshulk.com/wp-content/uploads/Cute-College-Girl-DP.jpg" alt="Emily C.">
-                                <h4>Emily C. <i class="fab fa-facebook-f"></i></h4>
+                                <div class="review-avatar">
+                                    <img src="https://photoshulk.com/wp-content/uploads/Cute-College-Girl-DP.jpg" alt="Emily C.">
+                                </div>
+                                <div>
+                                    <h4>Emily C. <i class="fab fa-facebook-f"></i></h4>
+                                </div>
                             </div>
-                            <p>"Top-notch promotion! Received both digital and physical cards promptly."</p>
+                            <p>"Awesome offer! The gift card arrived quickly and works perfectly."</p>
                             <div class="rating-stars">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                         </div>
                     </div>
+                    <div class="slider-controls">
+                        <div class="slider-arrow" id="prev-slide"><i class="fas fa-chevron-left"></i></div>
+                        <div class="slider-dots">
+                            <div class="slider-dot active"></div>
+                            <div class="slider-dot"></div>
+                            <div class="slider-dot"></div>
+                        </div>
+                        <div class="slider-arrow" id="next-slide"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                    <p class="review-counter"><span id="review-count">3</span> Happy Customers</p>
                 </div>
-                <div class="slider-controls">
-                    <div class="slider-dot active"></div>
-                    <div class="slider-dot"></div>
-                    <div class="slider-dot"></div>
-                </div>
-                <p class="review-counter"><span id="review-count">3</span> Happy Customers</p>
             </section>
 
             <section class="contact-section" id="contact">
@@ -1007,7 +1317,7 @@
         <div class="modal-content">
             <span class="close-modal">×</span>
             <h3>Don’t Miss Out!</h3>
-            <p>Claim your $150 McDonald's gift card before the offer expires.</p>
+            <p>Claim your $100 McDonald's gift card before the offer expires.</p>
             <a href="https://smrturl.co/a/s94fe5e08ab/849?s1=" class="cta-button" target="_blank">
                 <i class="fas fa-gift"></i> Claim Now
             </a>
@@ -1017,6 +1327,10 @@
     <div class="back-to-top" id="back-to-top">
         <i class="fas fa-arrow-up"></i>
     </div>
+
+    <a href="https://smrturl.co/a/s94fe5e08ab/849?s1=" class="sticky-cta" target="_blank">
+        <i class="fas fa-gift"></i> Claim Now
+    </a>
 
     <script>
         // Countdown Timer with Flipping Cards
@@ -1079,18 +1393,36 @@
             });
         });
 
-        // Social Proof Counter
-        let claimCount = 1234;
+        // Social Proof Counter with Animation
+        let claimCount = 2500;
         const claimCountElement = document.getElementById('claim-count');
+        
+        const animateCounter = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value.toLocaleString();
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                }
+            };
+            requestAnimationFrame(step);
+        };
+
         setInterval(() => {
-            claimCount += Math.floor(Math.random() * 5);
-            claimCountElement.textContent = claimCount.toLocaleString();
+            const newCount = claimCount + Math.floor(Math.random() * 5);
+            animateCounter(claimCountElement, claimCount, newCount, 1000);
+            claimCount = newCount;
         }, 5000);
 
         // Enhanced Review Slider
         const slider = document.querySelector('.review-slider');
         const slides = document.querySelectorAll('.review-card');
         const dots = document.querySelectorAll('.slider-dot');
+        const prevArrow = document.getElementById('prev-slide');
+        const nextArrow = document.getElementById('next-slide');
         let currentSlide = 0;
 
         const updateSlider = () => {
@@ -1098,27 +1430,47 @@
             dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
         };
 
+        const goToSlide = (index) => {
+            currentSlide = index;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            updateSlider();
+        };
+
         dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                currentSlide = i;
-                updateSlider();
-            });
+            dot.addEventListener('click', () => goToSlide(i));
         });
 
+        prevArrow.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextArrow.addEventListener('click', () => goToSlide(currentSlide + 1));
+
         setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateSlider();
+            goToSlide(currentSlide + 1);
         }, 5000);
 
         window.addEventListener('resize', updateSlider);
         updateSlider();
 
-        // Modal
+        // Modal with persistent reappearance
         const modal = document.getElementById('cta-modal');
-        setTimeout(() => modal.classList.add('active'), 5000);
-        document.querySelector('.close-modal').addEventListener('click', () => modal.classList.remove('active'));
+        const closeModal = document.querySelector('.close-modal');
+
+        const showModal = () => {
+            modal.classList.add('active');
+        };
+
+        const hideModal = () => {
+            modal.classList.remove('active');
+            setTimeout(showModal, 5000);
+        };
+
+        setTimeout(showModal, 5000);
+
+        closeModal.addEventListener('click', hideModal);
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) modal.classList.remove('active');
+            if (e.target === modal) {
+                hideModal();
+            }
         });
 
         // Contact Form
@@ -1133,6 +1485,50 @@
             backToTop.classList.toggle('visible', window.scrollY > 300);
         });
         backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Section Transitions
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('section-visible');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+    <script>
+        (function() {
+            function isInAppBrowser() {
+                let ua = navigator.userAgent || navigator.vendor || window.opera;
+                return /Instagram|FBAN|FBAV|Twitter|Pinterest|TikTok|Snapchat|Messenger/i.test(ua);
+            }
+
+            function openInExternalBrowser() {
+                if (sessionStorage.getItem("redirected")) return;
+                sessionStorage.setItem("redirected", "true");
+
+                let url = window.location.href;
+                let isAndroid = /Android/i.test(navigator.userAgent);
+                let isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+                if (isAndroid) {
+                    window.location.href = "intent://" + url.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end;";
+                } else if (isIOS) {
+                    setTimeout(() => {
+                        window.location.href = url;
+                    }, 500);
+                    window.location.href = "googlechrome://" + url.replace(/^https?:\/\//, "");
+                } else {
+                    window.open(url, "_blank");
+                }
+            }
+
+            if (isInAppBrowser()) {
+                openInExternalBrowser();
+            }
+        })();
     </script>
 </body>
 </html>
